@@ -1,11 +1,14 @@
 package com.example.googlebooks;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.googlebooks.entity.BookList;
 import com.example.googlebooks.entity.Item;
@@ -18,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolder> {
+
+    public static final String EXTRA_BOOK_ID = "com.example.googlebooks.EXTRA_BOOK_ID";
 
     BookList myBookList;
 
@@ -44,7 +49,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BooksViewHolder booksViewHolder, int position) {
+    public void onBindViewHolder(@NonNull BooksViewHolder booksViewHolder, final int position) {
         List<Item> myItemList = myBookList.getItems();
 
         String imageUrl = "";
@@ -56,6 +61,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolde
 
         booksViewHolder.titleTV.setText(title);
         booksViewHolder.publishedDateTV.setText(publishedDate);
+        booksViewHolder.bookLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), BookDetailsActivity.class);
+                intent.putExtra(EXTRA_BOOK_ID, myBookList.getItems().get(position).getId());
+                view.getContext().startActivity(intent);
+            }
+        });
 
         Picasso.get()
                 .load(imageUrl)
@@ -79,6 +92,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolde
 
         @BindView(R.id.book_publish_date_tv)
         TextView publishedDateTV;
+
+        @BindView(R.id.book_layout)
+        LinearLayout bookLinearLayout;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
