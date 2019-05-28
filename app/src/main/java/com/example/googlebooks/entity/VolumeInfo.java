@@ -5,12 +5,19 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class VolumeInfo implements Serializable {
 
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("authors")
+    @Expose
+    private List<String> authors = null;
+    @SerializedName("description")
+    @Expose
+    private String description;
     @SerializedName("publishedDate")
     @Expose
     private String publishedDate;
@@ -24,6 +31,22 @@ public class VolumeInfo implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPublishedDate() {
@@ -41,5 +64,4 @@ public class VolumeInfo implements Serializable {
     public void setImageLinks(ImageLinks imageLinks) {
         this.imageLinks = imageLinks;
     }
-
 }
