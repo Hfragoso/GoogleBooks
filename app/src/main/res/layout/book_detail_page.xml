@@ -23,7 +23,7 @@
                 tools:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/book_title"
+                android:id="@+id/book_published_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -34,11 +34,10 @@
                 android:maxLines="2"
                 android:textSize="20sp"
                 android:background="#66F5DDDD"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:gravity="center"
-                tools:text="Android: Programación de dispositivos móviles a través de ejemplos" />
+                tools:text="2012-07-01" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

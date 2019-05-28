@@ -42,8 +42,8 @@ public class BookViewPagerAdapter extends PagerAdapter {
     @BindView(R.id.book_cover)
     ImageView bookCover;
 
-    @BindView(R.id.book_title)
-    TextView bookTitle;
+    @BindView(R.id.book_published_date)
+    TextView bookPublishedDate;
 
     @BindView(R.id.authors)
     TextView authors;
@@ -67,7 +67,7 @@ public class BookViewPagerAdapter extends PagerAdapter {
                 .placeholder(R.mipmap.ic_launcher)
                 .into(bookCover);
 
-        bookTitle.setText(volumeInfo.getTitle());
+        bookPublishedDate.setText(volumeInfo.getPublishedDate());
         authors.setText(formatAuthors(volumeInfo.getAuthors()));
         description.setText(volumeInfo.getDescription());
 
