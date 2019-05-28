@@ -4,7 +4,9 @@ package com.example.googlebooks.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VolumeInfo {
+import java.io.Serializable;
+
+public class VolumeInfo implements Serializable {
 
     @SerializedName("title")
     @Expose
