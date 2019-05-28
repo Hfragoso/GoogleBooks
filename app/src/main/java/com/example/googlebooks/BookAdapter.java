@@ -21,8 +21,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolde
 
     BookList myBookList;
 
+    int indexCounter = 1;
+
     public BookAdapter(BookList myBookList) {
         this.myBookList = myBookList;
+    }
+
+    public void updateBookList(BookList newCallData) {
+        List<Item> mergeList = myBookList.getItems();
+        mergeList.addAll(newCallData.getItems());
+        myBookList.setItems(mergeList);
+        indexCounter++;
+        notifyDataSetChanged();
     }
 
     @NonNull
