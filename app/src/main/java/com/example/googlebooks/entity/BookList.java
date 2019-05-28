@@ -1,11 +1,12 @@
 
 package com.example.googlebooks.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BookList {
+public class BookList implements Serializable {
 
     @SerializedName("kind")
     @Expose

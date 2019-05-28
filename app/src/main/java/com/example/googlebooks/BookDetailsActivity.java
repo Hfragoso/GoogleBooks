@@ -5,18 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.googlebooks.entity.BookList;
+
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.googlebooks.BookAdapter.EXTRA_BOOK_ID;
+import static com.example.googlebooks.BookAdapter.EXTRA_BOOK_LIST;
+import static com.example.googlebooks.BookAdapter.EXTRA_SELECTED_POSITION;
+
 
 public class BookDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.book_id_tv)
     TextView tvBookId;
 
-    String bookId;
+    BookList bookList;
+    int selectedBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +33,12 @@ public class BookDetailsActivity extends AppCompatActivity {
     }
 
     private void displayDetails() {
-
+        tvBookId.setText("Book Title: " + bookList.getItems().get(selectedBook).getVolumeInfo().getTitle());
     }
 
     private void receiveIntent() {
         Intent intent = getIntent();
-        bookId = intent.getStringExtra(EXTRA_BOOK_ID);
+        bookList = (BookList) intent.getSerializableExtra(EXTRA_BOOK_LIST);
+        selectedBook = (int) intent.getSerializableExtra(EXTRA_SELECTED_POSITION);
     }
 }

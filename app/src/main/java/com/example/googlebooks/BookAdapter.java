@@ -1,6 +1,7 @@
 package com.example.googlebooks;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.googlebooks.entity.BookList;
 import com.example.googlebooks.entity.Item;
@@ -22,7 +22,8 @@ import butterknife.ButterKnife;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolder> {
 
-    public static final String EXTRA_BOOK_ID = "com.example.googlebooks.EXTRA_BOOK_ID";
+    public static final String EXTRA_BOOK_LIST = "com.example.googlebooks.EXTRA_BOOK_LIST";
+    public static final String EXTRA_SELECTED_POSITION = "com.example.googlebooks.EXTRA_SELECTED_POSITION";
 
     BookList myBookList;
 
@@ -65,13 +66,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolde
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), BookDetailsActivity.class);
-                intent.putExtra(EXTRA_BOOK_ID, myBookList.getItems().get(position).getId());
+                intent.putExtra(EXTRA_SELECTED_POSITION, position);
+                intent.putExtra(EXTRA_BOOK_LIST, myBookList);
                 view.getContext().startActivity(intent);
             }
         });
 
         Picasso.get()
-                .load(imageUrl)
+                .load(imageUrl != "" ? imageUrl : "emptypath")
                 .placeholder(R.mipmap.ic_launcher)
                 .into(booksViewHolder.thumbnailIV);
 
