@@ -3,11 +3,11 @@ package com.example.googlebooks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.googlebooks.entity.BookList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -17,11 +17,13 @@ import static com.example.googlebooks.BookAdapter.EXTRA_SELECTED_POSITION;
 
 public class BookDetailsActivity extends AppCompatActivity {
 
-    @BindView(R.id.book_id_tv)
-    TextView tvBookId;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
 
+    BookViewPagerAdapter bookViewPagerAdapter;
     BookList bookList;
     int selectedBook;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,9 @@ public class BookDetailsActivity extends AppCompatActivity {
     }
 
     private void displayDetails() {
-        tvBookId.setText("Book Title: " + bookList.getItems().get(selectedBook).getVolumeInfo().getTitle());
+        bookViewPagerAdapter = new BookViewPagerAdapter(bookList, this);
+        viewPager.setAdapter(bookViewPagerAdapter);
+        viewPager.setCurrentItem(selectedBook);
     }
 
     private void receiveIntent() {
